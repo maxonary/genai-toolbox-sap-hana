@@ -31,6 +31,7 @@ func TestLoadPrebuiltToolYAMLs(t *testing.T) {
 		"postgres",
 		"spanner-postgres",
 		"spanner",
+		"hana",
 	}
 	t.Run(test_name, func(t *testing.T) {
 		configsMap, keys, err := loadPrebuiltToolYAMLs()
@@ -40,7 +41,7 @@ func TestLoadPrebuiltToolYAMLs(t *testing.T) {
 		foundExpectedKeys := make(map[string]bool)
 
 		if len(expectedKeys) != len(configsMap) {
-			t.Fatalf("Failed to load all prebuilt tools.")
+			t.Fatalf("Failed to load all prebuilt tools. got %d want %d", len(configsMap), len(expectedKeys))
 		}
 
 		for _, expectedKey := range expectedKeys {
