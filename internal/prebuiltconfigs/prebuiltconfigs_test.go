@@ -70,7 +70,7 @@ func TestLoadPrebuiltToolYAMLs(t *testing.T) {
 		foundExpectedKeys := make(map[string]bool)
 
 		if len(expectedKeys) != len(configsMap) {
-			t.Fatalf("Failed to load all prebuilt tools. got %d want %d", len(configsMap), len(expectedKeys))
+			t.Fatalf("Failed to load all prebuilt tools.")
 		}
 
 		for _, expectedKey := range expectedKeys {
