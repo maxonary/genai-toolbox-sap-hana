@@ -1,0 +1,51 @@
+sources:
+  dsp-gateway:
+    kind: http
+    baseUrl: ${DSP_GATEWAY_BASEURL}
+    timeout: "30s"
+
+# Tools ----------------------------------------------------------------------
+
+# 1. Execute arbitrary SQL via /sql/execute ----------------------------------
+
+# POST /sql/execute
+# Body { "query": "..." }
+# Returns JSON with columns + rows.
+
+  # Parameter manifest (query param)
+
+tools:
+  execute_sql:
+    kind: http
+    source: dsp-gateway
+    description: "Execute SQL against SAP Datasphere via local proxy"
+    method: POST
+    path: /sql/execute
+    requestBody: |
+      {
+        "query": {{.query}}
+      }
+    bodyParams:
+      - name: query
+        type: string
+        description: "SQL statement to run"
+        required: true
+
+  validate_sql:
+    kind: http
+    source: dsp-gateway
+    description: "Validate a SQL statement without executing it"
+    method: GET
+    path: /sql/validate
+    queryParams:
+      - name: query
+        type: string
+        description: "SQL statement to validate"
+        required: true
+
+# Toolset --------------------------------------------------------------------
+
+toolsets:
+  dsp-gateway-tools:
+    - execute_sql
+    - validate_sql 
