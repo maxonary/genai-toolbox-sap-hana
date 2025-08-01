@@ -75,6 +75,174 @@ func RunToolGetTest(t *testing.T) {
 	}
 }
 
+func RunToolGetTestByName(t *testing.T, name string, want map[string]any) {
+	// Test tool get endpoint
+	tcs := []struct {
+		name string
+		api  string
+		want map[string]any
+	}{
+		{
+			name: fmt.Sprintf("get %s", name),
+			api:  fmt.Sprintf("http://127.0.0.1:5000/api/tool/%s/", name),
+			want: want,
+		},
+	}
+	for _, tc := range tcs {
+		t.Run(tc.name, func(t *testing.T) {
+			resp, err := http.Get(tc.api)
+			if err != nil {
+				t.Fatalf("error when sending a request: %s", err)
+			}
+			defer resp.Body.Close()
+			if resp.StatusCode != 200 {
+				t.Fatalf("response status code is not 200")
+			}
+
+			var body map[string]interface{}
+			err = json.NewDecoder(resp.Body).Decode(&body)
+			if err != nil {
+				t.Fatalf("error parsing response body")
+			}
+
+			got, ok := body["tools"]
+			if !ok {
+				t.Fatalf("unable to find tools in response body")
+			}
+			if !reflect.DeepEqual(got, tc.want) {
+				t.Fatalf("got %q, want %q", got, tc.want)
+			}
+		})
+	}
+}
+
+// RunToolInvokeSimpleTest runs the tool invoke endpoint with no parameters
+func RunToolInvokeSimpleTest(t *testing.T, name string, simpleWant string) {
+	// Test tool invoke endpoint
+	invokeTcs := []struct {
+		name          string
+		api           string
+		requestHeader map[string]string
+		requestBody   io.Reader
+		want          string
+		isErr         bool
+	}{
+		{
+			name:          fmt.Sprintf("invoke %s", name),
+			api:           fmt.Sprintf("http://127.0.0.1:5000/api/tool/%s/invoke", name),
+			requestHeader: map[string]string{},
+			requestBody:   bytes.NewBuffer([]byte(`{}`)),
+			want:          simpleWant,
+			isErr:         false,
+		},
+	}
+	for _, tc := range invokeTcs {
+		t.Run(tc.name, func(t *testing.T) {
+			// Send Tool invocation request
+			req, err := http.NewRequest(http.MethodPost, tc.api, tc.requestBody)
+			if err != nil {
+				t.Fatalf("unable to create request: %s", err)
+			}
+			req.Header.Add("Content-type", "application/json")
+			for k, v := range tc.requestHeader {
+				req.Header.Add(k, v)
+			}
+			resp, err := http.DefaultClient.Do(req)
+			if err != nil {
+				t.Fatalf("unable to send request: %s", err)
+			}
+			defer resp.Body.Close()
+
+			if resp.StatusCode != http.StatusOK {
+				if tc.isErr {
+					return
+				}
+				bodyBytes, _ := io.ReadAll(resp.Body)
+				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
+			}
+
+			// Check response body
+			var body map[string]interface{}
+			err = json.NewDecoder(resp.Body).Decode(&body)
+			if err != nil {
+				t.Fatalf("error parsing response body")
+			}
+
+			got, ok := body["result"].(string)
+			if !ok {
+				t.Fatalf("unable to find result in response body")
+			}
+
+			if !strings.Contains(got, tc.want) {
+				t.Fatalf("unexpected value: got %q, want %q", got, tc.want)
+			}
+		})
+	}
+}
+
+func RunToolInvokeParametersTest(t *testing.T, name string, params []byte, simpleWant string) {
+	// Test tool invoke endpoint
+	invokeTcs := []struct {
+		name          string
+		api           string
+		requestHeader map[string]string
+		requestBody   io.Reader
+		want          string
+		isErr         bool
+	}{
+		{
+			name:          fmt.Sprintf("invoke %s", name),
+			api:           fmt.Sprintf("http://127.0.0.1:5000/api/tool/%s/invoke", name),
+			requestHeader: map[string]string{},
+			requestBody:   bytes.NewBuffer(params),
+			want:          simpleWant,
+			isErr:         false,
+		},
+	}
+	for _, tc := range invokeTcs {
+		t.Run(tc.name, func(t *testing.T) {
+			// Send Tool invocation request
+			req, err := http.NewRequest(http.MethodPost, tc.api, tc.requestBody)
+			if err != nil {
+				t.Fatalf("unable to create request: %s", err)
+			}
+			req.Header.Add("Content-type", "application/json")
+			for k, v := range tc.requestHeader {
+				req.Header.Add(k, v)
+			}
+			resp, err := http.DefaultClient.Do(req)
+			if err != nil {
+				t.Fatalf("unable to send request: %s", err)
+			}
+			defer resp.Body.Close()
+
+			if resp.StatusCode != http.StatusOK {
+				if tc.isErr {
+					return
+				}
+				bodyBytes, _ := io.ReadAll(resp.Body)
+				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
+			}
+
+			// Check response body
+			var body map[string]interface{}
+			err = json.NewDecoder(resp.Body).Decode(&body)
+			if err != nil {
+				t.Fatalf("error parsing response body")
+			}
+
+			got, ok := body["result"].(string)
+			if !ok {
+				t.Fatalf("unable to find result in response body")
+			}
+
+			if !strings.Contains(got, tc.want) {
+				t.Fatalf("unexpected value: got %q, want %q", got, tc.want)
+			}
+		})
+	}
+}
+
 // RunToolInvoke runs the tool invoke endpoint
 func RunToolInvokeTest(t *testing.T, select1Want, invokeParamWant, invokeIdNullWant, nullString string, supportNullParam, supportsArray bool) {
 	// Get ID token
@@ -244,6 +412,7 @@ type TemplateParameterTestConfig struct {
 	nameFieldArray string
 	nameColFilter  string
 	createColArray string
+	insert1Want    string
 }
 
 type Option func(*TemplateParameterTestConfig)
@@ -297,6 +466,12 @@ func WithCreateColArray(s string) Option {
 	}
 }
 
+func WithInsert1Want(s string) Option {
+	return func(c *TemplateParameterTestConfig) {
+		c.insert1Want = s
+	}
+}
+
 // NewTemplateParameterTestConfig creates a new TemplateParameterTestConfig instances with options.
 func NewTemplateParameterTestConfig(options ...Option) *TemplateParameterTestConfig {
 	templateParamTestOption := &TemplateParameterTestConfig{
@@ -307,6 +482,7 @@ func NewTemplateParameterTestConfig(options ...Option) *TemplateParameterTestCon
 		nameFieldArray: `["name"]`,
 		nameColFilter:  "name",
 		createColArray: `["id INT","name VARCHAR(20)","age INT"]`,
+		insert1Want:    "null",
 	}
 
 	// Apply provided options
@@ -347,7 +523,7 @@ func RunToolInvokeWithTemplateParameters(t *testing.T, tableName string, config 
 			api:           "http://127.0.0.1:5000/api/tool/insert-table-templateParams-tool/invoke",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"tableName": "%s", "columns":["id","name","age"], "values":"1, 'Alex', 21"}`, tableName))),
-			want:          "null",
+			want:          config.insert1Want,
 			isErr:         false,
 		},
 		{
@@ -356,7 +532,7 @@ func RunToolInvokeWithTemplateParameters(t *testing.T, tableName string, config 
 			api:           "http://127.0.0.1:5000/api/tool/insert-table-templateParams-tool/invoke",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"tableName": "%s", "columns":["id","name","age"], "values":"2, 'Alice', 100"}`, tableName))),
-			want:          "null",
+			want:          config.insert1Want,
 			isErr:         false,
 		},
 		{
