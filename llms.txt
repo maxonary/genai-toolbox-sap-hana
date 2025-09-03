@@ -66,6 +66,7 @@ List of reference documentation for resources in Toolbox.
   - [OceanBase](https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/oceanbase/): OceanBase is a distributed relational database that provides high availability, scalability, and compatibility with MySQL.
   - [PostgreSQL](https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/postgres/): PostgreSQL is a powerful, open source object-relational database.
   - [Redis](https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/redis/): Redis is a in-memory data structure store.
+  - [SAP HANA](https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/hana/): SAP HANA is a high-performance in-memory database and application platform.
   - [Spanner](https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/spanner/): Spanner is a fully managed database service from Google Cloud that combines  relational, key-value, graph, and search capabilities.
   - [SQL Server](https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/mssql/): SQL Server is a relational database management system (RDBMS).
   - [SQLite](https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/sqlite/): SQLite is a C-language library that implements a small, fast, self-contained,  high-reliability, full-featured, SQL database engine.
@@ -90,6 +91,7 @@ List of reference documentation for resources in Toolbox.
   - [OceanBase](https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/oceanbase/): Tools that work with OceanBase Sources.
   - [Postgres](https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/postgres/): Tools that work with Postgres Sources, such as Cloud SQL for Postgres and AlloyDB. 
   - [Redis](https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/redis/): Tools that work with Redis Sources.
+  - [SAP HANA](https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/hana/): Tools that work with SAP HANA Sources, including HANA Cloud, on-premise HANA, and Datasphere. 
   - [Spanner](https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/spanner/): Tools that work with Spanner Sources.
   - [SQL Server](https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/mssql/): Tools that work with SQL Server Sources, such as CloudSQL for SQL Server.
   - [SQLite](https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/sqlite/): Tools that work with SQLite Sources.

@@ -711,7 +711,32 @@ Run Redis commands and interact with key-value pairs.&lt;/li>
 &lt;h3 id="redis">Redis&lt;/h3>
 &lt;p>&lt;a href="https://cloud.google.com/memorystore/docs/redis/about-redis-auth">AUTH string&lt;/a> is a password for connection to Redis. If you have the
 &lt;code>requirepass&lt;/code> directive set in your Redis configuration, incoming client
-connections must authenticate in order to connect.&lt;/p></description></item><item><title>Spanner</title><link>https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/spanner/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/spanner/</guid><description>&lt;h1 id="spanner-source">Spanner Source&lt;/h1>
+connections must authenticate in order to connect.&lt;/p></description></item><item><title>SAP HANA</title><link>https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/hana/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/hana/</guid><description>&lt;h2 id="about">About&lt;/h2>
+&lt;p>&lt;a href="https://help.sap.com/docs/SAP_HANA_PLATFORM">SAP HANA&lt;/a> is a high-performance in-memory database and application
+platform that enables businesses to process massive amounts of data in real time.
+It supports both transactional and analytical workloads in a single system.&lt;/p>
+&lt;h2 id="available-tools">Available Tools&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/hana/hana-sql/">&lt;code>hana-sql&lt;/code>&lt;/a>&lt;br>
+Execute parameterized SQL queries as prepared statements in SAP HANA.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/hana/hana-execute-sql/">&lt;code>hana-execute-sql&lt;/code>&lt;/a>&lt;br>
+Run ad-hoc SQL statements in SAP HANA.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="pre-built-configurations">Pre-built Configurations&lt;/h3>
+&lt;p>The HANA source includes pre-built tools for common database operations:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>execute_sql&lt;/code> - Execute arbitrary SQL statements&lt;/li>
+&lt;li>&lt;code>list_tables&lt;/code> - List tables in a given schema&lt;/li>
+&lt;/ul>
+&lt;h2 id="requirements">Requirements&lt;/h2>
+&lt;h3 id="database-user">Database User&lt;/h3>
+&lt;p>This source uses standard SAP HANA authentication. You will need to &lt;a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/b3ee5778bc2e4a089d3299b82ec762a7/c511a2c3bb571014a8cbfacb5b5da03a.html">create a
+HANA database user&lt;/a> with appropriate permissions to access the
+target database and schemas.&lt;/p></description></item><item><title>Spanner</title><link>https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/spanner/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/spanner/</guid><description>&lt;h1 id="spanner-source">Spanner Source&lt;/h1>
 &lt;p>&lt;a href="https://cloud.google.com/spanner/docs">Spanner&lt;/a> is a fully managed, mission-critical database service
 that brings together relational, graph, key-value, and search. It offers
 transactional consistency at global scale, automatic, synchronous replication

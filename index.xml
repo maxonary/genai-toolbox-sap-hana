@@ -1426,7 +1426,70 @@ in with the &lt;code>Client ID&lt;/code>.&lt;/p>
 &lt;h3 id="authorized-invocations">Authorized Invocations&lt;/h3>
 &lt;p>When using &lt;a href="https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/#authorized-invocations">Authorized Invocations&lt;/a>, a tool will be
 considered authorized if it has a valid Oauth 2.0 token that matches the Client
-ID.&lt;/p></description></item><item><title>http</title><link>https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/http/http/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/http/http/</guid><description>&lt;h2 id="about">About&lt;/h2>
+ID.&lt;/p></description></item><item><title>hana-execute-sql</title><link>https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/hana/hana-execute-sql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/hana/hana-execute-sql/</guid><description>&lt;h2 id="about">About&lt;/h2>
+&lt;p>A &lt;code>hana-execute-sql&lt;/code> tool executes a SQL statement against a SAP HANA
+database. It&amp;rsquo;s compatible with the following source:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/hana/">hana&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;code>hana-execute-sql&lt;/code> takes one input parameter &lt;code>sql&lt;/code> and runs the SQL
+statement against the &lt;code>source&lt;/code>.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>Note:&lt;/strong> This tool is intended for developer assistant workflows with
+human-in-the-loop and shouldn&amp;rsquo;t be used for production agents.&lt;/p>&lt;/blockquote>
+&lt;h2 id="example">Example&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">tools&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">execute_sql_tool&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">kind&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">hana-execute-sql&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">source&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">my-hana-instance&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">description&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Use this tool to execute SQL statements against SAP HANA. &lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="l">This tool can run any valid HANA SQL including SELECT, INSERT, UPDATE, &lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="l">DELETE, and DDL statements. Use with caution as it has full database access.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="reference">Reference&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>&lt;strong>field&lt;/strong>&lt;/th>
+ &lt;th style="text-align: center">&lt;strong>type&lt;/strong>&lt;/th>
+ &lt;th style="text-align: center">&lt;strong>required&lt;/strong>&lt;/th>
+ &lt;th>&lt;strong>description&lt;/strong>&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>kind&lt;/td>
+ &lt;td style="text-align: center">string&lt;/td>
+ &lt;td style="text-align: center">true&lt;/td>
+ &lt;td>Must be &amp;ldquo;hana-execute-sql&amp;rdquo;.&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>source&lt;/td>
+ &lt;td style="text-align: center">string&lt;/td>
+ &lt;td style="text-align: center">true&lt;/td>
+ &lt;td>Name of the source the SQL should execute on.&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>description&lt;/td>
+ &lt;td style="text-align: center">string&lt;/td>
+ &lt;td style="text-align: center">true&lt;/td>
+ &lt;td>Description of the tool that is passed to the LLM.&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table></description></item><item><title>hana-sql</title><link>https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/hana/hana-sql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/hana/hana-sql/</guid><description>&lt;h2 id="about">About&lt;/h2>
+&lt;p>A &lt;code>hana-sql&lt;/code> tool executes a pre-defined SQL statement against a SAP HANA
+database. It&amp;rsquo;s compatible with the following source:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/hana/">hana&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>The specified SQL statement is executed as a parameterized query, and specified
+parameters will be inserted according to their position. If template parameters
+are included, they will be resolved before execution of the prepared statement.&lt;/p>
+&lt;h2 id="example">Example&lt;/h2>
+&lt;blockquote>
+&lt;p>&lt;strong>Note:&lt;/strong> This tool uses parameterized queries to prevent SQL injections.
+Query parameters can be used as substitutes for arbitrary expressions.
+Parameters cannot be used as substitutes for identifiers, column names, table
+names, or other parts of the query.&lt;/p></description></item><item><title>http</title><link>https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/http/http/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/http/http/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>http&lt;/code> tool allows you to make HTTP requests to APIs to retrieve data.
 An HTTP request is the method by which a client communicates with a server to
 retrieve or manipulate resources.
@@ -3860,7 +3923,32 @@ Run Redis commands and interact with key-value pairs.&lt;/li>
 &lt;h3 id="redis">Redis&lt;/h3>
 &lt;p>&lt;a href="https://cloud.google.com/memorystore/docs/redis/about-redis-auth">AUTH string&lt;/a> is a password for connection to Redis. If you have the
 &lt;code>requirepass&lt;/code> directive set in your Redis configuration, incoming client
-connections must authenticate in order to connect.&lt;/p></description></item><item><title>Spanner</title><link>https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/spanner/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/spanner/</guid><description>&lt;h1 id="spanner-source">Spanner Source&lt;/h1>
+connections must authenticate in order to connect.&lt;/p></description></item><item><title>SAP HANA</title><link>https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/hana/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/hana/</guid><description>&lt;h2 id="about">About&lt;/h2>
+&lt;p>&lt;a href="https://help.sap.com/docs/SAP_HANA_PLATFORM">SAP HANA&lt;/a> is a high-performance in-memory database and application
+platform that enables businesses to process massive amounts of data in real time.
+It supports both transactional and analytical workloads in a single system.&lt;/p>
+&lt;h2 id="available-tools">Available Tools&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/hana/hana-sql/">&lt;code>hana-sql&lt;/code>&lt;/a>&lt;br>
+Execute parameterized SQL queries as prepared statements in SAP HANA.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://maxonary.github.io/genai-toolbox-sap-hana/resources/tools/hana/hana-execute-sql/">&lt;code>hana-execute-sql&lt;/code>&lt;/a>&lt;br>
+Run ad-hoc SQL statements in SAP HANA.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="pre-built-configurations">Pre-built Configurations&lt;/h3>
+&lt;p>The HANA source includes pre-built tools for common database operations:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>execute_sql&lt;/code> - Execute arbitrary SQL statements&lt;/li>
+&lt;li>&lt;code>list_tables&lt;/code> - List tables in a given schema&lt;/li>
+&lt;/ul>
+&lt;h2 id="requirements">Requirements&lt;/h2>
+&lt;h3 id="database-user">Database User&lt;/h3>
+&lt;p>This source uses standard SAP HANA authentication. You will need to &lt;a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/b3ee5778bc2e4a089d3299b82ec762a7/c511a2c3bb571014a8cbfacb5b5da03a.html">create a
+HANA database user&lt;/a> with appropriate permissions to access the
+target database and schemas.&lt;/p></description></item><item><title>Spanner</title><link>https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/spanner/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://maxonary.github.io/genai-toolbox-sap-hana/resources/sources/spanner/</guid><description>&lt;h1 id="spanner-source">Spanner Source&lt;/h1>
 &lt;p>&lt;a href="https://cloud.google.com/spanner/docs">Spanner&lt;/a> is a fully managed, mission-critical database service
 that brings together relational, graph, key-value, and search. It offers
 transactional consistency at global scale, automatic, synchronous replication
