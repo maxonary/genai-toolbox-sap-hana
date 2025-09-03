@@ -33,35 +33,9 @@ func newConfig(ctx context.Context, name string, decoder *yaml.Decoder) (sources
 }
 
 // Config defines the YAML schema for a SAP HANA source.
-// Example:
-//
-//	name: my-hana
-//	kind: hana
-//	host: hana.private.corp
-//	port: "39015"
-//	user: SYSTEM
-//	password: secret
-//	database: HXE
-//
-// All fields except QueryTimeout are required.
-// QueryTimeout follows the same semantics as other SQL drivers (e.g. "30s").
-// When set, it is mapped to the "timeout" DSN query parameter.
-//
-// See: https://github.com/SAP/go-hdb#hana-cloud-connection for details on the DSN format.
 //
 // NOTE: The go-hdb driver automatically negotiates TLS when required (e.g. HANA Cloud).
-// Additional TLS parameters can be passed via the DSN using standard go-hdb query parameters
-// (e.g. TLSServerName, TLSRootCAFile, TLSInsecureSkipVerify).
-// These can be appended manually via the `extraParams` field if needed in the future.
-// Currently only the most common parameters are exposed for simplicity.
-//
-// If more advanced options are required later we can extend this struct.
-// For now, mirroring the pattern used by other sources is sufficient.
-//
-// All string fields use string types to avoid YAML unmarshalling quirks with numbers.
-// This mirrors existing source implementations.
-//
-// Validation is handled elsewhere using `validator` tags.
+// All fields except QueryTimeout are required.
 type Config struct {
 	Name         string `yaml:"name" validate:"required"`
 	Kind         string `yaml:"kind" validate:"required"`
