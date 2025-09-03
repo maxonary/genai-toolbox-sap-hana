@@ -92,13 +92,20 @@ type Tool struct {
 	mcpManifest tools.McpManifest
 }
 
-func (t Tool) Invoke(ctx context.Context, params tools.ParamValues) (any, error) {
+func (t Tool) Invoke(ctx context.Context, params tools.ParamValues, accessToken tools.AccessToken) (any, error) {
 	db := t.DB
 	if db == nil {
 		return nil, fmt.Errorf("database connection is nil")
 	}
 
-	rows, err := db.QueryContext(ctx, t.manifest.Description)
+	// Extract the SQL statement from the parameters
+	paramsMap := params.AsMap()
+	sqlValue, ok := paramsMap["sql"].(string)
+	if !ok {
+		return nil, fmt.Errorf("required parameter 'sql' not provided")
+	}
+
+	rows, err := db.QueryContext(ctx, sqlValue)
 	if err != nil {
 		return nil, fmt.Errorf("failed to execute query: %w", err)
 	}
@@ -150,4 +157,8 @@ func (t Tool) McpManifest() tools.McpManifest { return t.mcpManifest }
 
 func (t Tool) Authorized(verifiedAuthServices []string) bool {
 	return tools.IsAuthorized(t.AuthRequired, verifiedAuthServices)
+}
+
+func (t Tool) RequiresClientAuthorization() bool {
+	return false
 }
