@@ -62,6 +62,7 @@ func TestLoadPrebuiltToolYAMLs(t *testing.T) {
 		"cloud-sql-postgres",
 		"dataplex",
 		"firestore",
+		"hana",
 		"looker",
 		"mssql",
 		"mysql",
@@ -69,7 +70,6 @@ func TestLoadPrebuiltToolYAMLs(t *testing.T) {
 		"postgres",
 		"spanner-postgres",
 		"spanner",
-		"hana",
 	}
 	t.Run(test_name, func(t *testing.T) {
 		configsMap, keys, err := loadPrebuiltToolYAMLs()
