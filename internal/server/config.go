@@ -55,6 +55,8 @@ type ServerConfig struct {
 	Stdio bool
 	// DisableReload indicates if the user has disabled dynamic reloading for Toolbox.
 	DisableReload bool
+	// UI indicates if Toolbox UI endpoints (/ui) are available
+	UI bool
 }
 
 type logFormat string
@@ -214,6 +216,11 @@ func (c *ToolConfigs) UnmarshalYAML(ctx context.Context, unmarshal func(interfac
 		var v map[string]any
 		if err := u.Unmarshal(&v); err != nil {
 			return fmt.Errorf("unable to unmarshal %q: %w", name, err)
+		}
+
+		// `authRequired` and `useClientOAuth` cannot be specified together
+		if v["authRequired"] != nil && v["useClientOAuth"] == true {
+			return fmt.Errorf("`authRequired` and `useClientOAuth` are mutually exclusive. Choose only one authentication method")
 		}
 
 		// Make `authRequired` an empty list instead of nil for Tool manifest

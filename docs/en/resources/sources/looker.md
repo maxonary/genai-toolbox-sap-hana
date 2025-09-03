@@ -39,12 +39,12 @@ sources:
 
 The Looker base url will look like "https://looker.example.com", don't include
 a trailing "/". In some cases, especially if your Looker is deployed
-on-premises, you may need to add the API port numner like
+on-premises, you may need to add the API port number like
 "https://looker.example.com:19999".
 
 Verify ssl should almost always be "true" (all lower case) unless you are using
 a self-signed ssl certificate for the Looker server. Anything other than "true"
-will be interpretted as false.
+will be interpreted as false.
 
 The client id and client secret are seemingly random character sequences
 assigned by the looker server.
@@ -56,11 +56,14 @@ instead of hardcoding your secrets into the configuration file.
 
 ## Reference
 
-| **field**     | **type** | **required** | **description**                                                                           |
-| ------------- | :------: | :----------: | ----------------------------------------------------------------------------------------- |
-| kind          |  string  |     true     | Must be "looker".                                                                         |
-| base_url      |  string  |     true     | The URL of your Looker server with no trailing /).                                        |
-| client_id     |  string  |     true     | The client id assigned by Looker.                                                         |
-| client_secret |  string  |     true     | The client secret assigned by Looker.                                                     |
-| verify_ssl    |  string  |     true     | Whether to check the ssl certificate of the server.                                       |
-| timeout       |  string  |    false     | Maximum time to wait for query execution (e.g. "30s", "2m"). By default, 120s is applied. |
+| **field**            | **type** | **required** | **description**                                                                           |
+| -------------------- | :------: | :----------: | ----------------------------------------------------------------------------------------- |
+| kind                 |  string  |     true     | Must be "looker".                                                                         |
+| base_url             |  string  |     true     | The URL of your Looker server with no trailing /).                                        |
+| client_id            |  string  |     true     | The client id assigned by Looker.                                                         |
+| client_secret        |  string  |     true     | The client secret assigned by Looker.                                                     |
+| verify_ssl           |  string  |     true     | Whether to check the ssl certificate of the server.                                       |
+| timeout              |  string  |    false     | Maximum time to wait for query execution (e.g. "30s", "2m"). By default, 120s is applied. |
+| show_hidden_models   |  string  |    false     | Show or hide hidden models. (default: true)                                               |
+| show_hidden_explores |  string  |    false     | Show or hide hidden explores. (default: true)                                             |
+| show_hidden_fields   |  string  |    false     | Show or hide hidden fields. (default: true)                                               |
