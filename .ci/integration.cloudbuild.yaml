@@ -818,8 +818,8 @@ availableSecrets:
       env: HANA_USER
     - versionName: projects/$PROJECT_ID/secrets/sap_hana_pass/versions/latest
       env: HANA_PASS
-    - versionName: projects/$PROJECT_ID/secrets/sap_hana_port/versions/latest
-      env: HANA_PORT
+    - versionName: projects/$PROJECT_ID/secrets/sap_hana_HOST/versions/latest
+      env: HANA_HOST
 
 options:
   logging: CLOUD_LOGGING_ONLY
