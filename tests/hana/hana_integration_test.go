@@ -113,77 +113,105 @@ func TestHanaToolEndpoints(t *testing.T) {
 	tableNameTemplateParam := "TEMPLATE_PARAM_TABLE_" + strings.ReplaceAll(uuid.New().String(), "-", "")
 
 	// set up data for param tool
-	createParamTableStmt, insertParamTableStmt, paramToolStmt, idParamToolStmt, nameParamToolStmt, arrayToolStmt, paramTestParams := tests.GetHanaParamToolInfo(tableNameParam)
-	teardownTable1 := tests.SetupHanaTable(t, ctx, db, createParamTableStmt, insertParamTableStmt, tableNameParam, paramTestParams)
+	createParamTableStmt, insertParamTableStmt, paramToolStmt, idParamToolStmt, nameParamToolStmt, arrayToolStmt, paramTestParams := getHanaParamToolInfo(tableNameParam)
+	teardownTable1 := setupHanaTable(t, ctx, db, createParamTableStmt, insertParamTableStmt, tableNameParam, paramTestParams)
 	defer teardownTable1(t)
 
 	// set up data for auth tool
-	createAuthTableStmt, insertAuthTableStmt, authToolStmt, authTestParams := tests.GetHanaAuthToolInfo(tableNameAuth)
-	teardownTable2 := tests.SetupHanaTable(t, ctx, db, createAuthTableStmt, insertAuthTableStmt, tableNameAuth, authTestParams)
+	createAuthTableStmt, insertAuthTableStmt, authToolStmt, authTestParams := getHanaAuthToolInfo(tableNameAuth)
+	teardownTable2 := setupHanaTable(t, ctx, db, createAuthTableStmt, insertAuthTableStmt, tableNameAuth, authTestParams)
 	defer teardownTable2(t)
 
-	// set up data for template param tool
-	createTemplateParamTableStmt, insertTemplateParamTableStmt, templateParamToolStmt, templateParamTestParams := tests.GetHanaTemplateParamToolInfo(tableNameTemplateParam)
-	teardownTable3 := tests.SetupHanaTable(t, ctx, db, createTemplateParamTableStmt, insertTemplateParamTableStmt, tableNameTemplateParam, templateParamTestParams)
-	defer teardownTable3(t)
+	// Write config into a file and pass it to command
+	toolsFile := tests.GetToolsConfig(sourceConfig, HanaToolKind, paramToolStmt, idParamToolStmt, nameParamToolStmt, arrayToolStmt, authToolStmt)
+	toolsFile = tests.AddPgExecuteSqlConfig(t, toolsFile)
+	tmplSelectCombined, tmplSelectFilterCombined := tests.GetPostgresSQLTmplToolStatement()
+	toolsFile = tests.AddTemplateParamConfig(t, toolsFile, HanaToolKind, tmplSelectCombined, tmplSelectFilterCombined, "")
 
-	ctxWithLogger, err := testutils.ContextWithNewLogger()
+	// Start test server
+	cmd, cleanup, err := tests.StartCmd(ctx, toolsFile, args...)
 	if err != nil {
-		t.Fatalf("unexpected error: %s", err)
+		t.Fatalf("command initialization returned an error: %s", err)
+	}
+	defer cleanup()
+
+	waitCtx, cancel := context.WithTimeout(ctx, 10*time.Second)
+	defer cancel()
+	out, err := testutils.WaitForString(waitCtx, regexp.MustCompile(`Server ready to serve`), cmd.Out)
+	if err != nil {
+		t.Logf("toolbox command logs: \n%s", out)
+		t.Fatalf("toolbox didn't start successfully: %s", err)
 	}
 
-	// Test hana-sql tool with parameters
-	args = []string{
-		tests.CreateSource("hana-source", sourceConfig),
-		tests.CreateToolWithParams("hana-param-tool", "hana-sql", "hana-source", "Test HANA param tool", paramToolStmt, paramTestParams),
-		tests.CreateToolWithParams("hana-id-param-tool", "hana-sql", "hana-source", "Test HANA ID param tool", idParamToolStmt, paramTestParams[:1]),
-		tests.CreateToolWithParams("hana-name-param-tool", "hana-sql", "hana-source", "Test HANA name param tool", nameParamToolStmt, paramTestParams[1:2]),
-		tests.CreateToolWithAuth("hana-auth-tool", "hana-sql", "hana-source", "Test HANA auth tool", authToolStmt, []string{"google"}, authTestParams),
-		tests.CreateToolWithArrayParams("hana-array-tool", "hana-sql", "hana-source", "Test HANA array tool", arrayToolStmt, paramTestParams),
-		tests.CreateToolWithTemplateParams("hana-template-param-tool", "hana-sql", "hana-source", "Test HANA template param tool", templateParamToolStmt, templateParamTestParams),
+	// Get configs for tests
+	select1Want, mcpMyFailToolWant, createTableStatement, mcpSelect1Want := getHanaWants()
+
+	// Run tests
+	tests.RunToolGetTest(t)
+	tests.RunToolInvokeTest(t, select1Want)
+	tests.RunMCPToolCallMethod(t, mcpMyFailToolWant, mcpSelect1Want)
+	tests.RunExecuteSqlToolInvokeTest(t, createTableStatement, select1Want)
+	tests.RunToolInvokeWithTemplateParameters(t, tableNameTemplateParam)
+}
+
+// getHanaWants return the expected wants for SAP Hana
+func getHanaWants() (string, string, string, string) {
+	select1Want := "[{\"?column?\":1}]"
+	mcpMyFailToolWant := `{"jsonrpc":"2.0","id":"invoke-fail-tool","result":{"content":[{"type":"text","text":"unable to execute query: ERROR: syntax error at or near \"SELEC\" (SQLSTATE 42601)"}],"isError":true}}`
+	createTableStatement := `"CREATE TABLE t (id SERIAL PRIMARY KEY, name TEXT)"`
+	mcpSelect1Want := `{"jsonrpc":"2.0","id":"invoke my-auth-required-tool","result":{"content":[{"type":"text","text":"{\"?column?\":1}"}]}}`
+	return select1Want, mcpMyFailToolWant, createTableStatement, mcpSelect1Want
+}
+
+// getHanaParamToolInfo returns statements and param for my-tool hana-sql kind
+func getHanaParamToolInfo(tableName string) (string, string, string, string, string, string, []any) {
+	createStatement := fmt.Sprintf("CREATE TABLE %s (id INTEGER NOT NULL PRIMARY KEY, name NVARCHAR(255))", tableName)
+	insertStatement := fmt.Sprintf("INSERT INTO %s (id, name) VALUES (?, ?), (?, ?), (?, ?), (?, ?)", tableName)
+	toolStatement := fmt.Sprintf("SELECT * FROM %s WHERE id = ? OR name = ?", tableName)
+	idParamStatement := fmt.Sprintf("SELECT * FROM %s WHERE id = ?", tableName)
+	nameParamStatement := fmt.Sprintf("SELECT * FROM %s WHERE name = ?", tableName)
+	arrayToolStatement := fmt.Sprintf("SELECT * FROM %s WHERE id IN (?, ?) AND name IN (?, ?)", tableName)
+	params := []any{1, "Alice", 2, "Jane", 3, "Sid", 4, nil}
+	return createStatement, insertStatement, toolStatement, idParamStatement, nameParamStatement, arrayToolStatement, params
+}
+
+// getHanaAuthToolInfo returns statements and param of my-auth-tool for hana-sql kind
+func getHanaAuthToolInfo(tableName string) (string, string, string, []any) {
+	createStatement := fmt.Sprintf("CREATE TABLE %s (id INTEGER NOT NULL PRIMARY KEY, name NVARCHAR(255), email NVARCHAR(255))", tableName)
+	insertStatement := fmt.Sprintf("INSERT INTO %s (id, name, email) VALUES (?, ?, ?), (?, ?, ?)", tableName)
+	toolStatement := fmt.Sprintf("SELECT name FROM %s WHERE email = ?", tableName)
+	params := []any{1, "Alice", tests.ServiceAccountEmail, 2, "Jane", "janedoe@gmail.com"}
+	return createStatement, insertStatement, toolStatement, params
+}
+
+// getHanaTemplateParamToolInfo returns statements and param for template parameter test cases for hana-sql kind
+func getHanaTemplateParamToolInfo(tableName string) (string, string, string, []any) {
+	createStatement := fmt.Sprintf("CREATE TABLE %s (id INTEGER NOT NULL PRIMARY KEY, name NVARCHAR(255))", tableName)
+	insertStatement := fmt.Sprintf("INSERT INTO %s (id, name) VALUES (?, ?), (?, ?)", tableName)
+	toolStatement := "SELECT * FROM {{.tableName}} WHERE id = ?"
+	params := []any{1, "Template1", 2, "Template2"}
+	return createStatement, insertStatement, toolStatement, params
+}
+
+// setupHanaTable sets up a table for testing HANA tools
+func setupHanaTable(t *testing.T, ctx context.Context, db *sql.DB, createStatement, insertStatement, tableName string, params []any) func(*testing.T) {
+	_, err := db.ExecContext(ctx, createStatement)
+	if err != nil {
+		t.Fatalf("failed to create table: %s", err)
 	}
 
-	tests.RunServerTest(t, ctxWithLogger, args,
-		[]tests.ToolTest{
-			{
-				Name:   "hana-param-tool",
-				Params: map[string]any{"id": 1, "name": "param1"},
-			},
-			{
-				Name:   "hana-id-param-tool",
-				Params: map[string]any{"id": 2},
-			},
-			{
-				Name:   "hana-name-param-tool",
-				Params: map[string]any{"name": "param2"},
-			},
-			{
-				Name:          "hana-auth-tool",
-				Params:        map[string]any{"id": 1},
-				AuthServices:  []string{"google"},
-				StatusPattern: regexp.MustCompile(`401`),
-			},
-			{
-				Name:   "hana-array-tool",
-				Params: map[string]any{"ids": []int{1, 2}},
-			},
-			{
-				Name:   "hana-template-param-tool",
-				Params: map[string]any{"tableName": tableNameTemplateParam},
-			},
-		})
-
-	// Test hana-execute-sql tool
-	args = []string{
-		tests.CreateSource("hana-source", sourceConfig),
-		tests.CreateTool("hana-execute-sql-tool", "hana-execute-sql", "hana-source", "Test HANA execute SQL tool"),
+	if len(params) > 0 {
+		_, err = db.ExecContext(ctx, insertStatement, params...)
+		if err != nil {
+			t.Fatalf("failed to insert into table: %s", err)
+		}
 	}
 
-	tests.RunServerTest(t, ctxWithLogger, args,
-		[]tests.ToolTest{
-			{
-				Name:   "hana-execute-sql-tool",
-				Params: map[string]any{"sql": fmt.Sprintf("SELECT COUNT(*) as row_count FROM %s", tableNameParam)},
-			},
-		})
+	return func(t *testing.T) {
+		dropStatement := fmt.Sprintf("DROP TABLE %s", tableName)
+		_, err := db.ExecContext(ctx, dropStatement)
+		if err != nil {
+			t.Logf("failed to drop table %s: %s", tableName, err)
+		}
+	}
 }
