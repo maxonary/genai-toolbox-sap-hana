@@ -38,7 +38,7 @@ var (
 	HanaHost       = os.Getenv("HANA_HOST")
 	HanaPort       = os.Getenv("HANA_PORT")
 	HanaUser       = os.Getenv("HANA_USER")
-	HanaPass       = os.Getenv("HANA_PASSWORD")
+	HanaPass       = os.Getenv("HANA_PASS")
 )
 
 func getHanaVars(t *testing.T) map[string]any {
