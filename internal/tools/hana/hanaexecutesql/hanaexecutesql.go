@@ -75,11 +75,7 @@ func (cfg Config) Initialize(srcs map[string]sources.Source) (tools.Tool, error)
 	sqlParam := tools.NewStringParameter("sql", "The sql to execute.")
 	parameters := tools.Parameters{sqlParam}
 
-	mcpManifest := tools.McpManifest{
-		Name:        cfg.Name,
-		Description: cfg.Description,
-		InputSchema: parameters.McpManifest(),
-	}
+	mcpManifest := tools.GetMcpManifest(cfg.Name, cfg.Description, cfg.AuthRequired, parameters)
 
 	t := Tool{
 		Name:         cfg.Name,

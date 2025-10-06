@@ -184,15 +184,6 @@ func getHanaAuthToolInfo(tableName string) (string, string, string, []any) {
 	return createStatement, insertStatement, toolStatement, params
 }
 
-// getHanaTemplateParamToolInfo returns statements and param for template parameter test cases for hana-sql kind
-func getHanaTemplateParamToolInfo(tableName string) (string, string, string, []any) {
-	createStatement := fmt.Sprintf("CREATE TABLE %s (id INTEGER NOT NULL PRIMARY KEY, name NVARCHAR(255))", tableName)
-	insertStatement := fmt.Sprintf("INSERT INTO %s (id, name) VALUES (?, ?), (?, ?)", tableName)
-	toolStatement := "SELECT * FROM {{.tableName}} WHERE id = ?"
-	params := []any{1, "Template1", 2, "Template2"}
-	return createStatement, insertStatement, toolStatement, params
-}
-
 // setupHanaTable sets up a table for testing HANA tools
 func setupHanaTable(t *testing.T, ctx context.Context, db *sql.DB, createStatement, insertStatement, tableName string, params []any) func(*testing.T) {
 	_, err := db.ExecContext(ctx, createStatement)
