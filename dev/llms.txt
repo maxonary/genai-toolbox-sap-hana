@@ -1,0 +1,144 @@
+# MCP Toolbox for Databases
+
+> MCP Toolbox for Databases is an open source MCP server for databases. It enables you to develop tools easier, faster, and more securely by handling the complexities such as connection pooling, authentication, and more.
+
+## Docs
+
+### Getting Started
+
+How to get started with Toolbox.
+- [Introduction](https://maxonary.github.io/genai-toolbox-sap-hana/dev/getting-started/introduction/): An introduction to MCP Toolbox for Databases.
+- [Python Quickstart (Local)](https://maxonary.github.io/genai-toolbox-sap-hana/dev/getting-started/local_quickstart/): How to get started running Toolbox locally with [Python](https://github.com/googleapis/mcp-toolbox-sdk-python), PostgreSQL, and  [Agent Development Kit](https://google.github.io/adk-docs/), [LangGraph](https://www.langchain.com/langgraph), [LlamaIndex](https://www.llamaindex.ai/) or [GoogleGenAI](https://pypi.org/project/google-genai/).
+- [JS Quickstart (Local)](https://maxonary.github.io/genai-toolbox-sap-hana/dev/getting-started/local_quickstart_js/): How to get started running Toolbox locally with [JavaScript](https://github.com/googleapis/mcp-toolbox-sdk-js), PostgreSQL, and orchestration frameworks such as [LangChain](https://js.langchain.com/docs/introduction/), [GenkitJS](https://genkit.dev/docs/get-started/),  [LlamaIndex](https://ts.llamaindex.ai/) and [GoogleGenAI](https://github.com/googleapis/js-genai).
+- [Go Quickstart (Local)](https://maxonary.github.io/genai-toolbox-sap-hana/dev/getting-started/local_quickstart_go/): How to get started running Toolbox locally with [Go](https://github.com/googleapis/mcp-toolbox-sdk-go), PostgreSQL, and orchestration frameworks such as [LangChain Go](https://tmc.github.io/langchaingo/docs/), [GenkitGo](https://genkit.dev/go/docs/get-started-go/), [Go GenAI](https://github.com/googleapis/go-genai) and [OpenAI Go](https://github.com/openai/openai-go).
+- [Quickstart (MCP)](https://maxonary.github.io/genai-toolbox-sap-hana/dev/getting-started/mcp_quickstart/): How to get started running Toolbox locally with MCP Inspector.
+- [Configuration](https://maxonary.github.io/genai-toolbox-sap-hana/dev/getting-started/configure/): How to configure Toolbox's tools.yaml file.
+
+### Concepts
+
+Some core concepts in Toolbox
+- [Telemetry](https://maxonary.github.io/genai-toolbox-sap-hana/dev/concepts/telemetry/): An overview of telemetry and observability in Toolbox.
+
+### How-to
+
+List of guides detailing how to do different things with Toolbox. 
+- [Connect from your IDE](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/): List of guides detailing how to connect your AI tools (IDEs) to Toolbox using MCP.
+  - [AlloyDB Admin API using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/alloydb_pg_admin_mcp/): Create your AlloyDB database with MCP Toolbox.
+  - [AlloyDB using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/alloydb_pg_mcp/): Connect your IDE to AlloyDB using Toolbox.
+  - [BigQuery using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/bigquery_mcp/): Connect your IDE to BigQuery using Toolbox.
+  - [Cloud SQL for MySQL using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/cloud_sql_mysql_mcp/): Connect your IDE to Cloud SQL for MySQL using Toolbox.
+  - [Cloud SQL for Postgres using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/cloud_sql_pg_mcp/): Connect your IDE to Cloud SQL for Postgres using Toolbox.
+  - [Cloud SQL for SQL Server using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/cloud_sql_mssql_mcp/): Connect your IDE to Cloud SQL for SQL Server using Toolbox.
+  - [Firestore using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/firestore_mcp/): Connect your IDE to Firestore using Toolbox.
+  - [Looker using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/looker_mcp/): Connect your IDE to Looker using Toolbox.
+  - [MySQL using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/mysql_mcp/): Connect your IDE to MySQL using Toolbox.  - [Neo4j using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/neo4j_mcp/): Connect your IDE to Neo4j using Toolbox.  - [PostgreSQL using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/postgres_mcp/): Connect your IDE to PostgreSQL using Toolbox.
+  - [Spanner using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/spanner_mcp/): Connect your IDE to Spanner using Toolbox.
+  - [SQL Server using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/mssql_mcp/): Connect your IDE to SQL Server using Toolbox.  - [SQLite using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/sqlite_mcp/): Connect your IDE to SQLite using Toolbox.  - [Cloud SQL for PostgreSQL Admin using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/cloud_sql_pg_admin_mcp/): Create and manage Cloud SQL for PostgreSQL (Admin) using Toolbox.
+  - [Cloud SQL for MySQL Admin using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/cloud_sql_mysql_admin_mcp/): Create and manage Cloud SQL for MySQL (Admin) using Toolbox.
+  - [Cloud SQL for SQL Server Admin using MCP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect-ide/cloud_sql_mssql_admin_mcp/): Create and manage Cloud SQL for SQL Server (Admin) using Toolbox.
+- [Connect via MCP Client](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect_via_mcp/): How to connect to Toolbox from a MCP Client.
+- [Toolbox UI](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/toolbox-ui/): How to effectively use Toolbox UI.
+- [Connect via Gemini CLI Extensions](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/connect_via_geminicli/): Connect to Toolbox via Gemini CLI Extensions.- [Deploy to Cloud Run](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/deploy_toolbox/): How to set up and configure Toolbox to run on Cloud Run.
+- [Deploy to Kubernetes](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/deploy_gke/): How to set up and configure Toolbox to deploy on Kubernetes with Google Kubernetes Engine (GKE).
+- [Deploy using Docker Compose](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/deploy_docker/): How to deploy Toolbox using Docker Compose.
+- [Export Telemetry](https://maxonary.github.io/genai-toolbox-sap-hana/dev/how-to/export_telemetry/): How to set up and configure Toolbox to use the Otel Collector.
+
+### Resources
+
+List of reference documentation for resources in Toolbox.
+- [AuthServices](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/authservices/): AuthServices represent services that handle authentication and authorization.
+  - [Google Sign-In](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/authservices/google/): Use Google Sign-In for Oauth 2.0 flow and token lifecycle.
+- [Sources](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/): Sources represent your different data sources that a tool can interact with.
+  - [AlloyDB for PostgreSQL](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/alloydb-pg/): AlloyDB for PostgreSQL is a fully-managed, PostgreSQL-compatible database for demanding transactional workloads.
+  - [BigQuery](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/bigquery/): BigQuery is Google Cloud's fully managed, petabyte-scale, and cost-effective analytics data warehouse that lets you run analytics over vast amounts of  data in near real time. With BigQuery, there's no infrastructure to set  up or manage, letting you focus on finding meaningful insights using  GoogleSQL and taking advantage of flexible pricing models across on-demand  and flat-rate options.
+  - [Bigtable](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/bigtable/): Bigtable is a low-latency NoSQL database service for machine learning, operational analytics, and user-facing operations. It's a wide-column, key-value store that can scale to billions of rows and thousands of columns. With Bigtable, you can replicate your data to regions across the world for high availability and data resiliency.
+  - [Cassandra](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/cassandra/): Cassandra is a NoSQL distributed database known for its horizontal scalability, distributed architecture, and flexible schema definition.
+  - [ClickHouse](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/clickhouse/): ClickHouse is an open-source, OLTP database.
+  - [Cloud Monitoring](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/cloud-monitoring/): A "cloud-monitoring" source provides a client for the Cloud Monitoring API.
+  - [Cloud SQL for MySQL](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/cloud-sql-mysql/): Cloud SQL for MySQL is a fully-managed database service for MySQL.
+  - [Cloud SQL for PostgreSQL](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/cloud-sql-pg/): Cloud SQL for PostgreSQL is a fully-managed database service for Postgres.
+  - [Cloud SQL for SQL Server](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/cloud-sql-mssql/): Cloud SQL for SQL Server is a fully-managed database service for SQL Server.
+  - [Cloud SQL Admin](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/cloud-sql-admin/): A "cloud-sql-admin" source provides a client for the Cloud SQL Admin API.
+  - [couchbase](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/couchbase/): A "couchbase" source connects to a Couchbase database.
+  - [Dataplex](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/dataplex/): Dataplex Universal Catalog is a unified, intelligent governance solution for data and AI assets in Google Cloud. Dataplex Universal Catalog powers AI, analytics, and business intelligence at scale.
+  - [Dgraph](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/dgraph/): Dgraph is fully open-source, built-for-scale graph database for Gen AI workloads
+  - [Firebird](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/firebird/): Firebird is a powerful, cross-platform, and open-source relational database.
+  - [Firestore](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/firestore/): Firestore is a NoSQL document database built for automatic scaling, high performance, and ease of application development. It's a fully managed, serverless database that supports mobile, web, and server development.
+  - [HTTP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/http/): The HTTP source enables the Toolbox to retrieve data from a remote server using HTTP requests.
+  - [Looker](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/looker/): Looker is a business intelligence tool that also provides a semantic layer.
+  - [MongoDB](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/mongodb/): MongoDB is a no-sql data platform that can not only serve general purpose data requirements also perform VectorSearch where both operational data and embeddings used of search can reside in same document.
+  - [MySQL](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/mysql/): MySQL is a relational database management system that stores and manages data.
+  - [Neo4j](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/neo4j/): Neo4j is a powerful, open source graph database system
+  - [OceanBase](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/oceanbase/): OceanBase is a distributed relational database that provides high availability, scalability, and compatibility with MySQL.
+  - [PostgreSQL](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/postgres/): PostgreSQL is a powerful, open source object-relational database.
+  - [Redis](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/redis/): Redis is a in-memory data structure store.
+  - [SAP HANA](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/hana/): SAP HANA is a high-performance in-memory database and application platform.
+  - [Spanner](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/spanner/): Spanner is a fully managed database service from Google Cloud that combines  relational, key-value, graph, and search capabilities.
+  - [SQL Server](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/mssql/): SQL Server is a relational database management system (RDBMS).
+  - [SQLite](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/sqlite/): SQLite is a C-language library that implements a small, fast, self-contained,  high-reliability, full-featured, SQL database engine.
+  - [TiDB](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/tidb/): TiDB is a distributed SQL database that combines the best of traditional RDBMS and NoSQL databases.
+  - [Trino](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/trino/): Trino is a distributed SQL query engine for big data analytics.
+  - [Valkey](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/valkey/): Valkey is an open-source, in-memory data structure store, forked from Redis.
+  - [YugabyteDB](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/yugabytedb/): YugabyteDB is a high-performance, distributed SQL database. 
+  - [AlloyDB Admin](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/sources/alloydb-admin/): The "alloydb-admin" source provides a client for the AlloyDB API.
+- [Tools](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/): Tools define actions an agent can take -- such as reading and writing to a source.
+  - [AlloyDB AI NL](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/alloydbainl/): AlloyDB AI NL Tool.
+  - [AlloyDB for PostgreSQL](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/alloydb/): Tools for AlloyDB for PostgreSQL.
+  - [BigQuery](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/bigquery/): Tools that work with BigQuery Sources.
+  - [Bigtable](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/bigtable/): Tools that work with Bigtable Sources.
+  - [Cassandra](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/cassandra/): Tools that work with Cassandra Sources.
+  - [ClickHouse](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/clickhouse/): Tools for interacting with ClickHouse databases and tables.
+  - [Cloud Monitoring](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/cloudmonitoring/): Tools that work with Cloud Monitoring source.
+  - [Cloud SQL](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/cloudsql/): Tools that work with Cloud SQL. 
+  - [Couchbase](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/couchbase/): Tools that work with Couchbase Sources.
+  - [Dataform](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/dataform/): Tools that work with Dataform.
+  - [Dataplex](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/dataplex/): Tools that work with Dataplex Sources.
+  - [Dgraph](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/dgraph/): Tools that work with Dgraph Sources.
+  - [Firebird](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/firebird/): Tools that work with Firebird Sources.
+  - [Firestore](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/firestore/): Tools that work with Firestore Sources.
+  - [HTTP](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/http/): Tools that work with HTTP Sources.
+  - [Looker](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/looker/): Tools that work with Looker Sources.
+  - [MongoDB](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/mongodb/): Tools that work with the MongoDB Source.
+  - [MySQL](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/mysql/): Tools that work with MySQL Sources, such as Cloud SQL for MySQL.
+  - [Neo4j](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/neo4j/): Tools that work with Neo4j Sources.
+  - [OceanBase](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/oceanbase/): Tools that work with OceanBase Sources.
+  - [Postgres](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/postgres/): Tools that work with Postgres Sources, such as Cloud SQL for Postgres and AlloyDB. 
+  - [Redis](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/redis/): Tools that work with Redis Sources.
+  - [SAP HANA](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/hana/): Tools that work with SAP HANA Sources, including HANA Cloud, on-premise HANA, and Datasphere. 
+  - [Spanner](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/spanner/): Tools that work with Spanner Sources.
+  - [SQL Server](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/mssql/): Tools that work with SQL Server Sources, such as CloudSQL for SQL Server.
+  - [SQLite](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/sqlite/): Tools that work with SQLite Sources.
+  - [TiDB](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/tidb/): Tools that work with TiDB Sources, such as TiDB Cloud and self-hosted TiDB.
+  - [Trino](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/trino/): Tools that work with Trino Sources, such as distributed SQL query engine.
+  - [Utility tools](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/utility/): Tools that provide utility.
+  - [Valkey](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/valkey/): Tools that work with Valkey Sources.
+  - [yugabytedb-sql](https://maxonary.github.io/genai-toolbox-sap-hana/dev/resources/tools/yugabytedb-sql/): A "yugabytedb-sql" tool executes a pre-defined SQL statement against a YugabyteDB database.
+
+### Samples
+
+Samples and guides for using Toolbox.
+- [AlloyDB](https://maxonary.github.io/genai-toolbox-sap-hana/dev/samples/alloydb/): How to get started with Toolbox using AlloyDB.
+  - [Quickstart (MCP with AlloyDB)](https://maxonary.github.io/genai-toolbox-sap-hana/dev/samples/alloydb/mcp_quickstart/): How to get started running Toolbox with MCP Inspector and AlloyDB as the source.
+  - [Getting started with alloydb-ai-nl tool](https://maxonary.github.io/genai-toolbox-sap-hana/dev/samples/alloydb/ai-nl/): An end to end tutorial for building an ADK agent using the AlloyDB AI NL tool.
+- [BigQuery](https://maxonary.github.io/genai-toolbox-sap-hana/dev/samples/bigquery/): How to get started with Toolbox using BigQuery.
+  - [Quickstart (Local with BigQuery)](https://maxonary.github.io/genai-toolbox-sap-hana/dev/samples/bigquery/local_quickstart/): How to get started running Toolbox locally with Python, BigQuery, and LangGraph, LlamaIndex, or ADK.
+  - [Quickstart (MCP with BigQuery)](https://maxonary.github.io/genai-toolbox-sap-hana/dev/samples/bigquery/mcp_quickstart/): How to get started running Toolbox with MCP Inspector and BigQuery as the source.
+- [Looker](https://maxonary.github.io/genai-toolbox-sap-hana/dev/samples/looker/): How to get started with Toolbox using Looker.
+  - [Gemini-CLI and OAuth](https://maxonary.github.io/genai-toolbox-sap-hana/dev/samples/looker/looker_gemini_oauth/): How to connect to Looker from Gemini-CLI with end-user credentials
+  - [Quickstart (MCP with Looker and Gemini-CLI)](https://maxonary.github.io/genai-toolbox-sap-hana/dev/samples/looker/looker_gemini/): How to get started running Toolbox with Gemini-CLI and Looker as the source.
+  - [Quickstart (MCP with Looker)](https://maxonary.github.io/genai-toolbox-sap-hana/dev/samples/looker/looker_mcp_inspector/): How to get started running Toolbox with MCP Inspector and Looker as the source.
+
+### About
+
+A list of other information related to Toolbox.
+- [FAQ](https://maxonary.github.io/genai-toolbox-sap-hana/dev/about/faq/): Frequently asked questions about Toolbox.
+### SDKs
+
+Client SDKs to connect to the MCP Toolbox server.
+- [Go SDK](https://maxonary.github.io/genai-toolbox-sap-hana/dev/sdks/go-sdk/): Go lang client SDK- [JS SDK](https://maxonary.github.io/genai-toolbox-sap-hana/dev/sdks/js-sdk/): Javascript client SDK- [Python SDK](https://maxonary.github.io/genai-toolbox-sap-hana/dev/sdks/python-sdk/): Python client SDK
+### Reference
+
+This section contains reference documentation.
+- [CLI](https://maxonary.github.io/genai-toolbox-sap-hana/dev/reference/cli/): This page describes the `toolbox` command-line options.
+- [Prebuilt Tools](https://maxonary.github.io/genai-toolbox-sap-hana/dev/reference/prebuilt-tools/): This page lists all the prebuilt tools available.
+
