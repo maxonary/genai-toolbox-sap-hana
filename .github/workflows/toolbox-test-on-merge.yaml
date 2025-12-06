@@ -1,0 +1,56 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: toolbox-test-on-merge
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+  merge-integration-tests:
+    name: toolbox-test-on-merge
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Setup Go
+        uses: actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00 # v6.0.0
+        with:
+          go-version: "1.24"
+
+      - name: Install dependencies
+        run: go get .
+
+      - name: Build
+        run: go build -v ./...
+
+      - name: Run integration tests
+        env:
+          GOTOOLCHAIN: go1.25.0+auto
+        run: |
+          source_dir="./internal/sources/*"
+          tool_dir="./internal/tools/*"
+          auth_dir="./internal/auth/*"
+          int_test_dir="./tests/*"
+          included_packages=$(go list ./... | grep -v -e "$source_dir" -e "$tool_dir" -e "$auth_dir" -e "$int_test_dir")
+          go test -race -cover -v $included_packages
+          go test -race -v ./internal/sources/... ./internal/tools/... ./internal/auth/...
